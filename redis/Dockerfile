@@ -13,4 +13,4 @@ WORKDIR /data
 VOLUME ["/data"]
 EXPOSE 6379
 
-ENTRYPOINT  ["redis-server", "/etc/redis/redis.conf"]
+CMD ["redis-server", "/etc/redis/redis.conf"]
