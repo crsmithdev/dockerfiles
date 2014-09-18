@@ -1,5 +1,5 @@
-FROM ubuntu:14.10
+FROM ubuntu:14.04
 
-RUN apt-get update
+RUN apt-get -q update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq build-essential wget
 
