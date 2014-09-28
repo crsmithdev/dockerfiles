@@ -8,6 +8,9 @@ RUN mkdir -p /etc/redis
 RUN cp redis-stable/redis.conf /etc/redis
 RUN rm -rf redis-stable
 
+RUN sed -i 's/^\(dir .*\)$/dir \/data/' /etc/redis/redis.conf
+RUN sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
+
 RUN mkdir -p /data
 WORKDIR /data
 VOLUME ["/data"]
