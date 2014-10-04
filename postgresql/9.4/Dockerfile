@@ -1,4 +1,7 @@
-FROM crsmithdev/ubuntu:latest
+FROM crsmithdev/ubuntu:14.04
+
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main 9.4" > /etc/apt/sources.list.d/pgdg.list
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -q update && apt-get install -yq \
     postgresql-9.4 \
