@@ -1,18 +1,16 @@
 FROM crsmithdev/ubuntu:latest
 
+ENV REDIS_VERSION 2.8.17
+
 WORKDIR /tmp
-RUN wget http://download.redis.io/releases/redis-stable.tar.gz 2>/dev/null
-RUN tar xvf redis-stable.tar.gz
-RUN cd redis-stable && make && make install
+RUN wget http://download.redis.io/releases/redis-$REDIS_VERSION.tar.gz 2>/dev/null
+RUN tar xvf redis-$REDIS_VERSION.tar.gz
+RUN cd redis-$REDIS_VERSION && make && make install
+RUN rm -rf redis-$REDIS_VERSION
+
 RUN mkdir -p /etc/redis
-RUN cp redis-stable/redis.conf /etc/redis
-RUN rm -rf redis-stable
+ADD redis.conf /etc/redis/redis.conf
 
-RUN sed -i 's/^\(dir .*\)$/dir \/data/' /etc/redis/redis.conf
-RUN sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
-
-RUN mkdir -p /data
-WORKDIR /data
 VOLUME ["/data"]
 EXPOSE 6379
 

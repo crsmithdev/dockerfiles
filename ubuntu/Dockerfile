@@ -1,5 +1,7 @@
 FROM ubuntu:14.04
 
-RUN apt-get -q update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq build-essential wget
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq update && apt-get -yq install \
+    build-essential \
+    wget
 
+CMD ["/bin/bash"]
