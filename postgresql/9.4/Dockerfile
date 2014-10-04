@@ -14,5 +14,6 @@ ADD start /start
 
 VOLUME ["/data"]
 EXPOSE 5432
+
 CMD ["./start"]
 
