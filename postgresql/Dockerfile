@@ -1,6 +1,6 @@
 FROM crsmithdev/ubuntu:latest
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -yq \
+RUN DEBIAN_FRONTEND=noninteractive apt-get -q update && apt-get install -yq \
     postgresql-9.4 \
     postgresql-contrib-9.4 \
     postgresql-client-9.4
