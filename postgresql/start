@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e
+
+PG_USER=${PG_USER:-"docker"}
+PG_PASS=${PG_PASS:-"docker"}
+PG_DB=${PG_DB:-"docker"}
+
+PG_BINS=/usr/lib/postgresql/9.4/bin
+PG_CONFIG=/etc/postgresql/9.4/main/postgresql.conf
+PG_DATA=/data/postgresql
+PG_SINGLE="sudo -u postgres $PG_BINS/postgres --single -D $PG_DATA --config_file=$PG_CONFIG"
+
+if [ ! "$(ls -A $PG_DATA)" ]; then
+    echo " ** data directory $PG_DATA is empty"
+    echo " ** initializing data directory"
+
+    mkdir -p /data/postgresql
+    chown postgres:postgres $PG_DATA
+    sudo -u postgres $PG_BINS/initdb -D $PG_DATA -E 'UTF-8'
+
+    echo " ** creating user '$PG_USER'"
+    $PG_SINGLE <<< "CREATE USER $PG_USER WITH SUPERUSER PASSWORD '$PG_PASS';" > /dev/null
+
+    echo " ** creating db '$PG_DB'"
+    $PG_SINGLE <<< "CREATE DATABASE $PG_DB OWNER $PG_USER;" > /dev/null
+fi
+
+echo " ** starting postgresql"
+exec sudo -u postgres $PG_BINS/postgres --config-file=$PG_CONFIG
