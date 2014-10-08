@@ -16,8 +16,3 @@ RUN ./godeb install 1.3.3
 RUN rm -rf godeb-amd64.tar.gz godeb
 
 WORKDIR /go
-VOLUME ["/go"]
-
-EXPOSE 8080
-
-
