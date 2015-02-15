@@ -9,13 +9,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -yq \
     bzr \
     mercurial
 
-WORKDIR /tmp
 RUN wget --quiet https://godeb.s3.amazonaws.com/godeb-amd64.tar.gz
 RUN tar xvf godeb-amd64.tar.gz
 RUN ./godeb install 1.4.1
+RUN rm -rf godeb-amd64.tar.gz godeb
 
-WORKDIR /go
-RUN rm -rf /tmp
-VOLUME ["/go"]
-
-EXPOSE 8080
+RUN go get github.com/tools/godep
