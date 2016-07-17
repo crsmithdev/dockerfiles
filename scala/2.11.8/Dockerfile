@@ -17,4 +17,6 @@ RUN \
     wget http://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
     sudo dpkg -i sbt-$SBT_VERSION.deb && \
     sudo apt-get update && \
-    sudo apt-get install sbt
+    sudo apt-get install sbt && \
+    sbt about
+
