@@ -5,6 +5,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -q update && apt-get -yq install \
     ca-certificates \
     build-essential \
     curl \
-    wget
+    wget \
+    git
 
 CMD ["/bin/bash"]
